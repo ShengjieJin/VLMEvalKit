@@ -387,6 +387,15 @@ h2ovl_series = {
     'h2ovl-mississippi-2b': partial(H2OVLChat, model_path='h2oai/h2ovl-mississippi-2b'),
     'h2ovl-mississippi-1b': partial(H2OVLChat, model_path='h2oai/h2ovl-mississippi-800m'),
 }
+awake_series = {
+    'Awaker2.5-VL': partial(
+        Awaker,
+        model_path='/home/shengjie_jin/models/Qwen/Qwen2-VL-7B-Instruct',
+        adapter_path='/home/shengjie_jin/models/MetabrainAGI/Awaker2.5-VL/pytorch_model.bin',
+        min_pixels=1280*28*28,
+        max_pixels=16384*28*28
+    ),
+}
 
 supported_VLM = {}
 
@@ -399,7 +408,7 @@ model_groups = [
     mantis_series, mmalaya_series, phi3_series, xgen_mm_series, qwen2vl_series,
     slime_series, eagle_series, moondream_series, llama_series, molmo_series,
     kosmos_series, points_series, nvlm_series, vintern_series, h2ovl_series, aria_series,
-    smolvlm_series, sail_series
+    smolvlm_series, sail_series, awake_series
 ]
 
 for grp in model_groups:

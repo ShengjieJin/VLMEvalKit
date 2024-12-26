@@ -110,16 +110,16 @@ class Qwen2VLChat(Qwen2VLPromptMixin, BaseModel):
             assert world_size == 1, 'Only support world_size == 1 when AUTO_SPLIT is set for non-72B Qwen2-VL'
             # Will Use All GPUs to run one model
             self.model = Qwen2VLForConditionalGeneration.from_pretrained(
-                model_path, torch_dtype='auto', device_map='auto', attn_implementation='flash_attention_2'
+                model_path, torch_dtype='auto', device_map='auto', #attn_implementation='flash_attention_2'
             )
         elif '72b' not in self.model_path.lower():
             self.model = Qwen2VLForConditionalGeneration.from_pretrained(
-                model_path, torch_dtype='auto', device_map='cpu', attn_implementation='flash_attention_2'
+                model_path, torch_dtype='auto', device_map='cpu', #attn_implementation='flash_attention_2'
             )
             self.model.cuda().eval()
         else:
             self.model = Qwen2VLForConditionalGeneration.from_pretrained(
-                model_path, torch_dtype='auto', device_map=split_model(), attn_implementation='flash_attention_2'
+                model_path, torch_dtype='auto', device_map=split_model(), #attn_implementation='flash_attention_2'
             )
             self.model.eval()
 

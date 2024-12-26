@@ -7,7 +7,7 @@ import math
 import logging
 
 import torch
-from peft import MoeConfig, get_peft_model
+from peft import get_peft_model
 from transformers import PreTrainedModel
 
 from ..base import BaseModel
@@ -51,7 +51,7 @@ def load_model_with_adapters(
     target_modules_for_moe = ["o_proj", "gate_proj", "up_proj", "down_proj"]
     num_experts = 4
     g_enable = True
-    
+    from peft import MoeConfig
     # LoRA config
     lora_config = MoeConfig(
         r=256,

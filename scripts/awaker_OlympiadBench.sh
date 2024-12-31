@@ -1,9 +1,9 @@
 export LMUData=~/datasets/LMUData
-CUDA_VISIBLE_DEVICES=1,2,3,4,5,6,7 \
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 \
 torchrun \
-    --nproc-per-node=7 \
+    --nproc-per-node=1 \
     run.py \
-    --data MathVerse_MINI_Text_Dominant \
+    --data OlympiadBench \
     --mode all \
     --model Awaker2.5-VL \
     --verbose \

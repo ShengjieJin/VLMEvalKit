@@ -181,7 +181,10 @@ def main():
     if world_size > 1:
         local_rank = os.environ.get('LOCAL_RANK', 0)
         torch.cuda.set_device(int(local_rank))
-        dist.init_process_group(backend='nccl', timeout=datetime.timedelta(seconds=3600))
+        dist.init_process_group(
+            backend='nccl',
+            timeout=datetime.timedelta(seconds=int(os.environ.get('DIST_TIMEOUT', 3600)))
+        )
 
     for _, model_name in enumerate(args.model):
         model = None
@@ -395,7 +398,7 @@ def main():
 
                     # Create the symbolic links for the prediction files
                     files = os.listdir(pred_root)
-                    files = [x for x in files if f'{model_name}_{dataset_name}' in x]
+                    files = [x for x in files if (f'{model_name}_{dataset_name}' in x or "status.json" in x)]
                     for f in files:
                         cwd = os.getcwd()
                         file_addr = osp.join(cwd, pred_root, f)
